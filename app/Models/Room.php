@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Room extends Model
 {
@@ -12,6 +13,7 @@ class Room extends Model
         'boarding_house_id',
         'name',
         'room_type',
+        'capacity',
         'square_feet',
         'price_per_month',
         'is_available',
@@ -27,4 +29,20 @@ class Room extends Model
     public function transactions():HasMany {
         return $this->hasMany(Transaction::class);
     }
+
+    protected static function boot()
+{
+    parent::boot();
+
+    static::deleting(function ($room) {
+        // Hapus semua RoomImage terkait
+        foreach ($room->images as $roomImage) {
+            if ($roomImage->image && Storage::disk('public')->exists($roomImage->image)) {
+                Storage::disk('public')->delete($roomImage->image);
+            }
+            $roomImage->delete(); // Hapus record RoomImage
+        }
+    });
+}
+
 }

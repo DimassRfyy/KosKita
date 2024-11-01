@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BoardingHouse extends Model
 {
@@ -41,4 +43,48 @@ class BoardingHouse extends Model
     public function transactions():HasMany {
         return $this->hasMany(Transaction::class);
     }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    protected static function boot()
+{
+    parent::boot();
+
+    // Hapus thumbnail saat data boarding house dihapus
+    static::deleting(function ($boardingHouse) {
+        if ($boardingHouse->thumbnail && Storage::disk('public')->exists($boardingHouse->thumbnail)) {
+            Storage::disk('public')->delete($boardingHouse->thumbnail);
+        }
+
+        foreach ($boardingHouse->bonuses as $bonus) {
+            if ($bonus->image && Storage::disk('public')->exists($bonus->image)) {
+                Storage::disk('public')->delete($bonus->image);
+            }
+            $bonus->delete(); // Hapus record bonus
+        }
+
+        foreach ($boardingHouse->rooms as $room) {
+            // Hapus gambar dari room
+            foreach ($room->images as $image) {
+                if ($image->image && Storage::disk('public')->exists($image->image)) {
+                    Storage::disk('public')->delete($image->image);
+                }
+                $image->delete(); // Hapus record image
+            }
+            $room->delete(); // Hapus record room
+        }
+    });
+
+    // Hapus thumbnail lama sebelum diperbarui
+    static::updating(function ($boardingHouse) {
+        if ($boardingHouse->isDirty('thumbnail') && $boardingHouse->getOriginal('thumbnail')) {
+            Storage::disk('public')->delete($boardingHouse->getOriginal('thumbnail'));
+        }
+    });
+}
+
 }
