@@ -151,7 +151,7 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
             <br>
             <span class="text-sm font-normal">/bulan</span>
         </p>
-        <a href="room-available.html"
+        <a href="{{ route('rooms', $boardingHouse->slug) }}"
             class="flex shrink-0 rounded-full py-[14px] px-5 bg-ngekos-orange font-bold text-white">Book
             Now</a>
     </div>

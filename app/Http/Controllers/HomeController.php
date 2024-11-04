@@ -57,4 +57,9 @@ class HomeController extends Controller
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
         return view('pages.details', compact('boardingHouse'));
     }
+
+    public function rooms($slug) {
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
+        return view('pages.rooms', compact('boardingHouse'));
+    }
 }
