@@ -52,4 +52,9 @@ class HomeController extends Controller
         $cities = $this->cityRepository->getAllCities();
         return view('pages.find', compact('categories','cities'));
     }
+
+    public function details($slug) {
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
+        return view('pages.details', compact('boardingHouse'));
+    }
 }

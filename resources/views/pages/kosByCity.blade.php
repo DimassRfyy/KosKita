@@ -42,8 +42,8 @@ class="absolute top-0 w-full h-[570px] rounded-b-[75px] bg-[linear-gradient(180d
                 <p class="text-sm text-ngekos-grey">4 People</p>
             </div>
             <hr class="border-[#F1F2F6]">
-            <p class="font-semibold text-lg text-ngekos-orange">Rp. {{ number_format($boardingHouse->price, 0, ',', '.') }}<span
-                    class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
+            <p class="font-semibold text-md text-ngekos-orange">Rp. {{ number_format($boardingHouse->price, 0, ',', '.') }}<span
+                    class="text-xs text-ngekos-grey font-normal">/bulan</span></p>
         </div>
     </div>
 </a>

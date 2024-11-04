@@ -12,3 +12,5 @@ Route::get('/city/{slug}',[HomeController::class,'kosByCity'])->name('kosByCity'
 Route::get('/check-booking',[HomeController::class,'check'])->name('check');
 
 Route::get('/find',[HomeController::class,'find'])->name('find');
+
+Route::get('/details/{slug}',[HomeController::class,'details'])->name('details');
