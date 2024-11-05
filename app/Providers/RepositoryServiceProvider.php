@@ -8,7 +8,9 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\CategoryRepository;
 use App\Interfaces\CityRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
+use App\Interfaces\TransactionRepositoryInterface;
 use App\Repositories\BoardingHouseRepository;
+use App\Repositories\TransactionRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(BoardingHouseRepositoryInterface::class, BoardingHouseRepository::class);
+        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
     }
 
     /**
