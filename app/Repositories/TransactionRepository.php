@@ -59,4 +59,8 @@ class TransactionRepository implements TransactionRepositoryInterface
     private function calculatePaymentAmount($total, $paymentMethod) {
         return $paymentMethod === 'full_payment' ? $total : $total * 0.3;
     }
+
+    public function getTransactionByCode($code) {
+        return Transaction::where('code', $code)->first();
+    }
 }

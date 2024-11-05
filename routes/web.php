@@ -26,3 +26,5 @@ Route::post('/booking/{slug}/information/save',[HomeController::class,'informati
 Route::get('/booking/{slug}/checkout',[HomeController::class,'checkout'])->name('checkout');
 
 Route::post('/booking/{slug}/payment',[HomeController::class,'payment'])->name('payment');
+
+Route::get('/payment-success',[HomeController::class,'payment_success'])->name('payment_success');
