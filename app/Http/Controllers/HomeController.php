@@ -59,22 +59,19 @@ class HomeController extends Controller
         if (!$transaction) {
             return redirect()->back()->with('error', 'Transaction not found');
         }
-    
-        session()->put('transaction', $transaction);
-    
-        return redirect()->route('my_booking');
-    }
-    
-    
-    public function my_booking() {
-        $transaction = session()->get('transaction');
-    
-        if (!$transaction) {
-            return redirect()->back()->with('error', 'No booking data available.');
-        }
-    
+
         return view('pages.my_booking', compact('transaction'));
-    }    
+    }
+
+    public function my_booking($code) {
+        $transaction = $this->transactionRepository->getTransactionByCode($code);
+
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Transaction not found');
+        }
+        
+        return view('pages.my_booking', compact('transaction'));
+    }
 
     public function find() {
         $categories = $this->categoryRepository->getAllCategories();

@@ -13,7 +13,7 @@ Route::get('/check-booking',[HomeController::class,'check'])->name('check');
 
 Route::post('/check-booking/show',[HomeController::class,'show_booking'])->name('show_booking');
 
-Route::get('/my-booking', [HomeController::class, 'my_booking'])->name('my_booking');
+Route::get('/my-booking/{code}', [HomeController::class, 'my_booking'])->name('my_booking');
 
 Route::get('/find',[HomeController::class,'find'])->name('find');
 
