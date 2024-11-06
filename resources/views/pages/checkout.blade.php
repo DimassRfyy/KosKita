@@ -235,7 +235,7 @@ class="accordion group flex flex-col rounded-[30px] p-5 bg-[#F5F6F8] mx-5 mt-5 o
                 <div class="flex items-center gap-3">
                     <img src="/assets/images/icons/receipt-disscount.svg" class="w-6 h-6 flex shrink-0"
                         alt="icon">
-                    <p class="text-ngekos-grey">PPN 11%</p>
+                    <p class="text-ngekos-grey">PPN 5%</p>
                 </div>
                 <p class="font-semibold">Rp. {{ number_format($tax, 0, ',', '.') }}</p>
             </div>

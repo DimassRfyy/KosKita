@@ -38,12 +38,12 @@
                         <img src="/assets/images/icons/3dcube.svg" class="w-5 h-5 flex shrink-0" alt="icon">
                         <p class="text-sm text-ngekos-grey">{{ $transaction->room->square_feet }} sqft flat</p>
                     </div>
-                    <div class="flex items-center gap-[6px]">
-                        <img src="/assets/images/icons/calendar.svg" class="w-5 h-5 flex shrink-0" alt="icon">
-                        <p class="text-sm text-ngekos-grey">{{ \Carbon\Carbon::parse($transaction->start_date)->format('d F Y') }}</p> -
-                        <p class="text-sm text-ngekos-grey">{{ \Carbon\Carbon::parse($transaction->start_date)->addMonths(intval($transaction->duration))->format('d F Y') }}</p>
-                    </div>
                 </div>
+            </div>
+            <div class="flex items-center justify-center gap-[6px] mx-auto mt-5">
+                <img src="/assets/images/icons/calendar.svg" class="w-5 h-5 flex shrink-0" alt="icon">
+                <p class="text-sm text-ngekos-grey">{{ \Carbon\Carbon::parse($transaction->start_date)->format('d F Y') }}</p>-
+                <p class="text-sm text-ngekos-grey">{{ \Carbon\Carbon::parse($transaction->start_date)->addMonths(intval($transaction->duration))->format('d F Y') }}</p>
             </div>
         </div>
     </div>
