@@ -58,4 +58,23 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
     public function getBoardingHouseRoomById($id) {
         return Room::find($id);
     }
+
+    public function findBoardingHouses($name, $citySlug, $categorySlug)
+    {
+        return BoardingHouse::query()
+            ->when($name, function ($query, $name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            })
+            ->when($citySlug, function ($query, $citySlug) {
+                $query->whereHas('city', function ($query) use ($citySlug) {
+                    $query->where('slug', $citySlug);
+                });
+            })
+            ->when($categorySlug, function ($query, $categorySlug) {
+                $query->whereHas('category', function ($query) use ($categorySlug) {
+                    $query->where('slug', $categorySlug);
+                });
+            })
+            ->get();
+    }
 }

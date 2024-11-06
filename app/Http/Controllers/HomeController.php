@@ -79,6 +79,17 @@ class HomeController extends Controller
         return view('pages.find', compact('categories','cities'));
     }
 
+    public function result_find(Request $request)
+    {
+        $name = $request->input('name');
+        $citySlug = $request->input('city');
+        $categorySlug = $request->input('category');
+
+        $boardingHouses = $this->boardingHouseRepository->findBoardingHouses($name, $citySlug, $categorySlug);
+
+        return view('pages.resultFind', compact('boardingHouses'));
+    }
+
     public function details($slug) {
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
         return view('pages.details', compact('boardingHouse'));

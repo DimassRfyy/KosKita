@@ -17,6 +17,8 @@ Route::get('/my-booking/{code}', [HomeController::class, 'my_booking'])->name('m
 
 Route::get('/find',[HomeController::class,'find'])->name('find');
 
+Route::post('/result-find',[HomeController::class,'result_find'])->name('result_find');
+
 Route::get('/details/{slug}',[HomeController::class,'details'])->name('details');
 
 Route::get('/rooms/{slug}',[HomeController::class,'rooms'])->name('rooms');
