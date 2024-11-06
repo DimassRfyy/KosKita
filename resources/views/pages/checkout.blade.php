@@ -216,7 +216,7 @@ class="accordion group flex flex-col rounded-[30px] p-5 bg-[#F5F6F8] mx-5 mt-5 o
         </div>
         <div id="FullPayment-Tab" class="tab-content flex flex-col gap-4 hidden">
             <p class="text-sm text-ngekos-grey">Anda tidak perlu membayar biaya tambahan apapun ketika
-                survey koskos</p>
+                survey kos</p>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <img src="/assets/images/icons/card-tick.svg" class="w-6 h-6 flex shrink-0" alt="icon">

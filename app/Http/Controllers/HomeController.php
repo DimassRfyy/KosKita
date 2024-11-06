@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckBookingRequest;
 use App\Http\Requests\CustomerInformationRequest;
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
@@ -51,6 +52,29 @@ class HomeController extends Controller
     public function check() {
         return view('pages.check_booking');
     }
+
+    public function show_booking(CheckBookingRequest $request) {
+        $transaction = $this->transactionRepository->getTransactionByCodeEmailPhone($request->code, $request->email, $request->phone_number);
+    
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'Transaction not found');
+        }
+    
+        session()->put('transaction', $transaction);
+    
+        return redirect()->route('my_booking');
+    }
+    
+    
+    public function my_booking() {
+        $transaction = session()->get('transaction');
+    
+        if (!$transaction) {
+            return redirect()->back()->with('error', 'No booking data available.');
+        }
+    
+        return view('pages.my_booking', compact('transaction'));
+    }    
 
     public function find() {
         $categories = $this->categoryRepository->getAllCategories();

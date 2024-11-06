@@ -56,7 +56,13 @@
     </div>
     <div class="flex flex-col gap-[14px]">
         <a href="{{ route('index') }}" class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-orange">Explore Other Kos</a>
-        <a href="booking-details.html" class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-black">View My Booking</a>
+        <form action="{{ route('show_booking') }}" method="POST">
+            @csrf
+            <input type="hidden" name="code" value="{{ $transaction->code }}">
+            <input type="hidden" name="email" value="{{ $transaction->email }}">
+            <input type="hidden" name="phone_number" value="{{ $transaction->phone_number }}">
+            <button class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-black">View My Booking</button>
+        </form>
     </div>
 </div>
 @endsection
