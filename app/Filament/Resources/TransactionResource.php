@@ -77,14 +77,24 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()
+                    ->description(fn ($record): string => $record->email)
+                    ->weight('medium'),
                 Tables\Columns\TextColumn::make('phone_number')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('payment_method'),
                 Tables\Columns\TextColumn::make('payment_status')
-                    ->searchable(),
+                ->searchable()
+                ->formatStateUsing(fn ($state) => match ($state) {
+                    'success' => '<span style="color: green; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    'pending' => '<span style="color: orange; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    'failed' => '<span style="color: red; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    'expired' => '<span style="color: gray; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    'canceled' => '<span style="color: darkred; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    'unknown' => '<span style="color: blue; font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                    default => '<span style="font-weight: bold; text-transform: uppercase;">' . $state . '</span>',
+                })
+                ->html(),
                 Tables\Columns\TextColumn::make('total_amount')
                     ->numeric()
                     ->sortable(),
@@ -111,7 +121,13 @@ class TransactionResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc')
+            ->paginated([
+                'items_per_page_options' => [10, 25, 50, 100],
+                'default_items_per_page' => 10,
+            ])
+            ->paginationPageOptions([10, 25, 50, 100]);
     }
 
     public static function getRelations(): array

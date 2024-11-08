@@ -6,8 +6,7 @@ class="absolute top-0 w-full h-[280px] rounded-bl-[75px] bg-[linear-gradient(180
 </div>
 <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
 <div class="flex flex-col gap-1">
-    <p>Good day,</p>
-    <h1 class="font-bold text-xl leading-[30px]">Explore Cozy Home</h1>
+    <img src="assets/images/photos/logo.png" height="150" width="150" alt="">
 </div>
 <a href="#"
     class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white">

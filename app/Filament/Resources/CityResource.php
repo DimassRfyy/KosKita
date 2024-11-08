@@ -61,7 +61,13 @@ class CityResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc')
+            ->paginated([
+                'items_per_page_options' => [10, 25, 50, 100],
+                'default_items_per_page' => 10,
+            ])
+            ->paginationPageOptions([10, 25, 50, 100]);;
     }
 
     public static function getRelations(): array
