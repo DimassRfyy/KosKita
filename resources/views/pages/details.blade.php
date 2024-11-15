@@ -121,7 +121,7 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
                     </div>
                     <div>
                         <p class="font-semibold">{{ $testimoni->name }}</p>
-                        <p class="mt-[2px] text-sm text-ngekos-grey">{{ $testimoni->created_at->format('d F Y') }}</p>                        </p>
+                        <p class="mt-[2px] text-sm text-ngekos-grey">{{ $testimoni->created_at->format('d F Y') }}</p>
                     </div>
                 </div>
                 <p class="leading-[26px]">{{ $testimoni->content }}</p>
@@ -137,8 +137,31 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
     </div>
     <div id="Rules-Tab" class="tab-content flex-col gap-5 hidden">Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Porro, vitae.</div>
-    <div id="Contact-Tab" class="tab-content flex-col gap-5 hidden">Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Porro, vitae.</div>
+    <div id="Contact-Tab" class="tab-content flex-col gap-5 hidden">
+        <p class="text-sm leading-[28px]">If you have any questions please contact this contact</p>
+        @foreach ($boardingHouse->contacts as $contact)
+        <div class="flex flex-col gap-5">
+            <div id="Contact" class="flex flex-col gap-2">
+              <div class="rounded-[22px] border border-[#F1F2F6] flex items-center justify-between p-4 bg-white hover:border-[#91BF77] transition-all duration-300">
+                <div class="flex items-center gap-[10px]">
+                    <div
+                    class="w-[70px] h-[70px] flex shrink-0 rounded-full border-4 border-white ring-1 ring-[#F1F2F6] overflow-hidden">
+                    <img src="{{ Storage::url($contact->avatar) }}" class="w-full h-full object-cover"
+                        alt="icon">
+                    </div>
+                  <div class="flex flex-col h-fit">
+                    <p class="font-semibold">{{ $contact->name }}</p>
+                    <p class="text-sm leading-[21px] text-[#909DBF]">{{ $contact->email }}</p>
+                  </div>
+                </div>
+                <a href="tel:{{$contact->phone}}"
+                  class="appearance-none font-semibold text-sm leading-[21px] hover:underline">Call
+                  Now</a>
+              </div>
+            </div>
+          </div>
+        @endforeach
+    </div>
     <div id="Rewards-Tab" class="tab-content flex-col gap-5 hidden">Lorem ipsum dolor sit amet consectetur
         adipisicing elit. Porro, vitae.</div>
 </div>

@@ -44,6 +44,10 @@ class BoardingHouse extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function contacts():HasMany {
+        return $this->hasMany(Contact::class);
+    }
+
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;

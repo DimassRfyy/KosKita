@@ -24,87 +24,110 @@ class BoardingHouseResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-home-modern';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Tabs::make('Tabs')
-            ->tabs([
-        Tabs\Tab::make('Informasi Umum')
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-                Forms\Components\FileUpload::make('thumbnail')
-                ->image()
-                ->directory('boardingHouse')
-                ->required(),
-                Forms\Components\Select::make('city_id')
-                ->relationship('city', 'name')
-                ->required(),
-                Forms\Components\Select::make('category_id')
-                ->relationship('category', 'name')
-                ->required(),
-                Forms\Components\RichEditor::make('description')
-                ->required(),
-                Forms\Components\TextInput::make('price')
-                ->numeric()
-                ->prefix('IDR')
-                ->required(),
-                Forms\Components\Textarea::make('address')
-                ->required(),
-            ]),
-        Tabs\Tab::make('Bonus')
-            ->schema([
-                Repeater::make('bonuses')
-                ->relationship('bonuses')
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-                Forms\Components\FileUpload::make('image')
-                ->image()
-                ->directory('bonusImage')
-                ->required(),
-                Forms\Components\Textarea::make('description')
-                ->required(),
-            ])
-            ]),
-        Tabs\Tab::make('Pilihan Kamar')
-            ->schema([
-                Repeater::make('rooms')
-                ->relationship('rooms')
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-                Forms\Components\TextInput::make('room_type')
-                ->required()
-                ->maxLength(255),
-                Forms\Components\TextInput::make('square_feet')
-                ->numeric()
-                ->required(),
-                Forms\Components\TextInput::make('capacity')
-                ->numeric()
-                ->required(),
-                Forms\Components\TextInput::make('price_per_month')
-                ->numeric()
-                ->prefix('IDR')
-                ->required(),
-                Forms\Components\Toggle::make('is_available')
-                ->required(),
-                Repeater::make('images')
-                ->relationship('images')
-            ->schema([
-                Forms\Components\FileUpload::make('image')
-                ->image()
-                ->directory('roomsImage')
-                ->required(),
-            ])
-            ])
-            ]),
-    ])->columnSpanFull()
-            ]);
-    }
+{
+    return $form
+        ->schema([
+            Tabs::make('Tabs')
+                ->tabs([
+                    Tabs\Tab::make('General Information')
+                        ->schema([
+                            Forms\Components\TextInput::make('name')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\FileUpload::make('thumbnail')
+                                ->image()
+                                ->directory('boardingHouse')
+                                ->required(),
+                            Forms\Components\Select::make('city_id')
+                                ->relationship('city', 'name')
+                                ->required(),
+                            Forms\Components\Select::make('category_id')
+                                ->relationship('category', 'name')
+                                ->required(),
+                            Forms\Components\RichEditor::make('description')
+                                ->required(),
+                            Forms\Components\TextInput::make('price')
+                                ->numeric()
+                                ->prefix('IDR')
+                                ->required(),
+                            Forms\Components\Textarea::make('address')
+                                ->required(),
+                        ]),
+                    Tabs\Tab::make('Bonuses')
+                        ->schema([
+                            Repeater::make('bonuses')
+                                ->relationship('bonuses')
+                                ->schema([
+                                    Forms\Components\TextInput::make('name')
+                                        ->required()
+                                        ->maxLength(255),
+                                    Forms\Components\FileUpload::make('image')
+                                        ->image()
+                                        ->directory('bonusImage')
+                                        ->required(),
+                                    Forms\Components\Textarea::make('description')
+                                        ->required(),
+                                ]),
+                        ]),
+                    Tabs\Tab::make('Room Choice')
+                        ->schema([
+                            Repeater::make('rooms')
+                                ->relationship('rooms')
+                                ->schema([
+                                    Repeater::make('images')
+                                        ->relationship('images')
+                                        ->schema([
+                                            Forms\Components\FileUpload::make('image')
+                                                ->image()
+                                                ->directory('roomsImage')
+                                                ->required(),
+                                        ]),
+                                    Forms\Components\TextInput::make('name')
+                                        ->required()
+                                        ->maxLength(255),
+                                    Forms\Components\TextInput::make('room_type')
+                                        ->required()
+                                        ->maxLength(255),
+                                    Forms\Components\TextInput::make('square_feet')
+                                        ->numeric()
+                                        ->required(),
+                                    Forms\Components\TextInput::make('capacity')
+                                        ->numeric()
+                                        ->required(),
+                                    Forms\Components\TextInput::make('price_per_month')
+                                        ->numeric()
+                                        ->prefix('IDR')
+                                        ->required(),
+                                    Forms\Components\Toggle::make('is_available')
+                                        ->required(),
+                                ]),
+                        ]),
+                    Tabs\Tab::make('Contact Owner')
+                        ->schema([
+                            Repeater::make('contacts')
+                                ->relationship('contacts')
+                                ->schema([
+                            Forms\Components\FileUpload::make('avatar')
+                                ->image()
+                                ->directory('contactAvatar')
+                                ->required(),
+                            Forms\Components\TextInput::make('name')
+                                ->label('Owner Name')
+                                ->required()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('phone')
+                                ->label('Phone Number')
+                                ->tel()
+                                ->required(),
+                            Forms\Components\TextInput::make('email')
+                                ->email()
+                                ->required()
+                                ->maxLength(255),
+                                ]),
+                        ]),
+                ])->columnSpanFull()
+        ]);
+}
 
     public static function table(Table $table): Table
     {
