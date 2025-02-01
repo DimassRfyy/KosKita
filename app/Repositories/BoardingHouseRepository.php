@@ -29,30 +29,37 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
             });
         }
 
-        return $query->get();
+        return $query->with(['category','city'])->get();
     }
 
     public function getPopularBoardingHouses($limit = 5) {
 
-        return BoardingHouse::withCount('transactions')->orderBy('transactions_count', 'desc')->take($limit)->get();
+        return BoardingHouse::withCount('transactions')->orderBy('transactions_count', 'desc')->with(['category','city'])->take($limit)->get();
     }
 
     public function getBoardingHouseByCitySlug($slug) {
        
         return BoardingHouse::whereHas('city', function($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get();
+        })->with('category')->get();
     }
     public function getBoardingHouseByCategorySlug($slug) {
        
         return BoardingHouse::whereHas('category', function($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get();
+        })->with('city')->get();
     }
 
     public function getBoardingHouseBySlug($slug) {
         
-        return BoardingHouse::where('slug', $slug)->first();
+        return BoardingHouse::where('slug', $slug)->with([
+            'city',
+            'category',
+            'bonuses',
+            'testimonials',
+            'contacts',
+            'facilities',
+        ])->first();
     }
 
     public function getBoardingHouseRoomById($id) {
@@ -75,6 +82,7 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
                     $query->where('slug', $categorySlug);
                 });
             })
+            ->with(['category','city'])
             ->get();
     }
 }

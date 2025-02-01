@@ -34,8 +34,8 @@ class="absolute top-0 w-full h-[570px] rounded-b-[75px] bg-[linear-gradient(180d
             <h3 class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">{{ $boardingHouse->name }}</h3>
             <hr class="border-[#F1F2F6]">
             <div class="flex items-center gap-[6px]">
-                <img src="{{ asset('assets/images/icons/location.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
-                <p class="text-sm text-ngekos-grey">{{ $city->name }}</p>
+                <img src="{{ asset('assets/images/icons/3dcube.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
+                <p class="text-sm text-ngekos-grey">{{ $boardingHouse->category->name }}</p>
             </div>
             <div class="flex items-center gap-[6px]">
                 <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">

@@ -49,7 +49,7 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
     </div>
     <div class="flex items-center gap-[6px]">
         <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-[26px] h-[26px] flex shrink-0" alt="icon">
-        <p class="text-ngekos-grey">4 People</p>
+        <p class="text-ngekos-grey"> Max 4 People</p>
     </div>
     <div class="flex items-center gap-[6px]">
         <img src="{{ asset('assets/images/icons/shield-tick.svg') }}" class="w-[26px] h-[26px] flex shrink-0" alt="icon">
@@ -66,6 +66,11 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
         <div class="swiper-slide !w-fit">
             <button
                 class="tab-link rounded-full p-[8px_14px] border border-[#F1F2F6] text-sm font-semibold hover:bg-ngekos-black hover:text-white transition-all duration-300 !bg-ngekos-black !text-white"
+                data-target-tab="#Facilities-Tab">Facilities</button>
+        </div>
+        <div class="swiper-slide !w-fit">
+            <button
+                class="tab-link rounded-full p-[8px_14px] border border-[#F1F2F6] text-sm font-semibold hover:bg-ngekos-black hover:text-white transition-all duration-300"
                 data-target-tab="#Bonus-Tab">Bonus</button>
         </div>
         <div class="swiper-slide !w-fit">
@@ -91,21 +96,33 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
     </div>
 </div>
 <div id="TabsContent" class="px-5">
-    <div id="Bonus-Tab" class="tab-content flex flex-col gap-5">
-        <div class="flex flex-col gap-5">
-          @foreach ($boardingHouse->bonuses as $bonus)
-          <div
-          class="bonus-card flex items-center rounded-[22px] border border-[#F1F2F6] p-[10px] gap-3 hover:border-[#91BF77] transition-all duration-300">
-          <div class="flex w-[120px] h-[90px] shrink-0 rounded-[18px] bg-[#D9D9D9] overflow-hidden">
-              <img src="{{ Storage::url($bonus->image) }}" class="w-full h-full object-cover"
-                  alt="thumbnails">
-          </div>
-          <div>
-              <p class="font-semibold">{{ $bonus->name }}</p>
-              <p class="text-xs text-ngekos-grey">{{ $bonus->description }}</p>
-          </div>
+    <div id="Facilities-Tab" class="tab-content grid grid-cols-2 gap-3">
+        @foreach ($boardingHouse->facilities as $facility)
+        <div
+            class="facility-card flex items-center rounded-[22px] border border-[#F1F2F6] p-[10px] gap-3 hover:border-[#91BF77] transition-all duration-300">
+            <div class="flex w-[30px] h-[30px] shrink-0 overflow-hidden">
+                <img src="{{ Storage::url($facility->icon) }}" class="w-full h-full max-w-[30px] max-h-[30px] object-cover" alt="WiFi">
+            </div>
+            <p class="font-semibold">{{ $facility->name }}</p>
         </div>
-          @endforeach
+        @endforeach
+    </div>
+    
+    <div id="Bonus-Tab" class="tab-content flex flex-col gap-5 hidden">
+        <div class="flex flex-col gap-5">
+            @foreach ($boardingHouse->bonuses as $bonus)
+            <div
+            class="bonus-card flex items-center rounded-[22px] border border-[#F1F2F6] p-[10px] gap-3 hover:border-[#91BF77] transition-all duration-300">
+            <div class="flex w-[120px] h-[90px] shrink-0 rounded-[18px] bg-[#D9D9D9] overflow-hidden">
+                <img src="{{ Storage::url($bonus->image) }}" class="w-full h-full object-cover"
+                    alt="thumbnails">
+            </div>
+            <div>
+                <p class="font-semibold">{{ $bonus->name }}</p>
+                <p class="text-xs text-ngekos-grey">{{ $bonus->description }}</p>
+            </div>
+            </div>
+            @endforeach
         </div>
     </div>
     <div id="Testimonials-Tab" class="tab-content flex-col gap-5 hidden">

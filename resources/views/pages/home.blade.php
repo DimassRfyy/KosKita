@@ -27,7 +27,7 @@ class="absolute top-0 w-full h-[280px] rounded-bl-[75px] bg-[linear-gradient(180
                 </div>
                 <div class="flex flex-col gap-[2px]">
                     <h3 class="font-semibold">{{ $category->name }}</h3>
-                    <p class="text-sm text-ngekos-grey">{{ $category->boardingHouses->count() }} Kos</p>
+                    <p class="text-sm text-ngekos-grey">{{ $category->boardingHouses->count() }} Available</p>
                 </div>
             </div>
         </a>

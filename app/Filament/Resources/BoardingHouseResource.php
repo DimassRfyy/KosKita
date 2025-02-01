@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BoardingHouseResource\Pages;
 use App\Filament\Resources\BoardingHouseResource\RelationManagers;
+use Filament\Forms\Components\Fieldset;
 
 class BoardingHouseResource extends Resource
 {
@@ -53,8 +54,17 @@ class BoardingHouseResource extends Resource
                             Forms\Components\Textarea::make('address')
                                 ->required(),
                         ]),
-                    Tabs\Tab::make('Bonuses')
+                    Tabs\Tab::make('Bonuses & Facilities')
                         ->schema([
+                            Fieldset::make('Facilities')
+                                ->schema([
+                                    Forms\Components\Select::make('facilities')
+                                    ->multiple()
+                                    ->searchable()
+                                    ->preload()
+                                    ->relationship('facilities', 'name')
+                                    ->required(),
+                                ]),
                             Repeater::make('bonuses')
                                 ->relationship('bonuses')
                                 ->schema([

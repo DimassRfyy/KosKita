@@ -26,7 +26,7 @@ class Transaction extends Model
         return $this->belongsTo(BoardingHouse::class);
     }
 
-    public function room ():BelongsTo {
+    public function room():BelongsTo {
         return $this->belongsTo(Room::class);
     }
 }

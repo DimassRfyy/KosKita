@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BoardingHouse extends Model
 {
@@ -28,7 +29,7 @@ class BoardingHouse extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function rooms ():HasMany {
+    public function rooms():HasMany {
         return $this->hasMany(Room::class);
     }
 
@@ -46,6 +47,10 @@ class BoardingHouse extends Model
 
     public function contacts():HasMany {
         return $this->hasMany(Contact::class);
+    }
+
+    public function facilities(): BelongsToMany {
+        return $this->belongsToMany(Facility::class, 'boarding_house_facility');
     }
 
     public function setNameAttribute($value)
