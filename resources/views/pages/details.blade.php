@@ -71,6 +71,11 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
         <div class="swiper-slide !w-fit">
             <button
                 class="tab-link rounded-full p-[8px_14px] border border-[#F1F2F6] text-sm font-semibold hover:bg-ngekos-black hover:text-white transition-all duration-300"
+                data-target-tab="#Address-Tab">Address</button>
+        </div>
+        <div class="swiper-slide !w-fit">
+            <button
+                class="tab-link rounded-full p-[8px_14px] border border-[#F1F2F6] text-sm font-semibold hover:bg-ngekos-black hover:text-white transition-all duration-300"
                 data-target-tab="#Bonus-Tab">Bonus</button>
         </div>
         <div class="swiper-slide !w-fit">
@@ -107,6 +112,43 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
         </div>
         @endforeach
     </div>
+    
+    <div id="Address-Tab" class="tab-content flex flex-col gap-5 hidden">
+        <div class="flex flex-col gap-3">
+            <div class="rounded-[18px] overflow-hidden border border-[#F1F2F6] hover:border-[#91BF77] transition-all duration-300">
+                <iframe 
+                    src="https://www.google.com/maps?q={{ urlencode($boardingHouse->address) }}&output=embed"
+                    width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+    
+            <a href="https://www.google.com/maps/search/?q={{ urlencode($boardingHouse->address) }}" 
+               target="_blank" 
+               class="w-full text-center bg-[#91BF77] text-white font-semibold p-3 rounded-[18px] hover:bg-[#7FA766] transition-all duration-300">
+                See on Google Maps
+            </a>
+    
+            <div class="p-4 border border-[#F1F2F6] rounded-[18px] hover:border-[#91BF77] transition-all duration-300">
+                <p class="text-sm font-semibold">{{ $boardingHouse->address }}</p>
+            </div>
+    
+            <div class="flex flex-col gap-3">
+                <h3 class="text-lg font-semibold">Nearest Place</h3>
+                @foreach ($boardingHouse->nearestPlaces as $nearestPlace)
+                    <div class="flex items-center gap-3 p-[10px] border border-[#F1F2F6] rounded-[18px] hover:border-[#91BF77] transition-all duration-300">
+                        <div class="w-[40px] h-[40px] shrink-0 rounded-full overflow-hidden bg-[#D9D9D9] flex items-center justify-center">
+                            <img src="{{ Storage::url($nearestPlace->icon) }}" class="w-8 h-8 object-contain" alt="Rumah Sakit">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="font-semibold">{{ $nearestPlace->name }}</p>
+                            <p class="text-xs text-gray-500">{{ $nearestPlace->distance }}m</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    
     
     <div id="Bonus-Tab" class="tab-content flex flex-col gap-5 hidden">
         <div class="flex flex-col gap-5">

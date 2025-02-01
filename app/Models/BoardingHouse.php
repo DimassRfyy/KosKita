@@ -53,6 +53,10 @@ class BoardingHouse extends Model
         return $this->hasMany(Rule::class);
     }
 
+    public function nearestPlaces():HasMany {
+        return $this->hasMany(NearestPlace::class);
+    }
+
     public function facilities(): BelongsToMany {
         return $this->belongsToMany(Facility::class, 'boarding_house_facility');
     }

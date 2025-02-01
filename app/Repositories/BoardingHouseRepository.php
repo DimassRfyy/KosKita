@@ -60,6 +60,7 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
             'contacts',
             'facilities',
             'rules',
+            'nearestPlaces',
         ])->first();
     }
 
