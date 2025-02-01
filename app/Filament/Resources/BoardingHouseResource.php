@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BoardingHouseResource\Pages;
 use App\Filament\Resources\BoardingHouseResource\RelationManagers;
+use App\Filament\Resources\BoardingHouseResource\RelationManagers\RulesRelationManager;
 use Filament\Forms\Components\Fieldset;
 
 class BoardingHouseResource extends Resource
@@ -199,7 +200,7 @@ class BoardingHouseResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RulesRelationManager::class,
         ];
     }
 

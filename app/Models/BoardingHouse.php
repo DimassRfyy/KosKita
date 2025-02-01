@@ -49,6 +49,10 @@ class BoardingHouse extends Model
         return $this->hasMany(Contact::class);
     }
 
+    public function rules():HasMany {
+        return $this->hasMany(Rule::class);
+    }
+
     public function facilities(): BelongsToMany {
         return $this->belongsToMany(Facility::class, 'boarding_house_facility');
     }

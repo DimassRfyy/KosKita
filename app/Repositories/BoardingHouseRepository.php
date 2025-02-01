@@ -59,6 +59,7 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
             'testimonials',
             'contacts',
             'facilities',
+            'rules',
         ])->first();
     }
 

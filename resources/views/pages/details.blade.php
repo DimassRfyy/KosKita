@@ -152,8 +152,17 @@ class="absolute top-0 w-full h-[143px] bg-[linear-gradient(180deg,#070707_0%,rgb
           @endforeach
         </div>
     </div>
-    <div id="Rules-Tab" class="tab-content flex-col gap-5 hidden">Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Porro, vitae.</div>
+    <div id="Rules-Tab" class="tab-content flex flex-col gap-3 hidden">
+        @foreach ($boardingHouse->rules as $rule)
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3 p-4 border border-[#F1F2F6] rounded-[18px] hover:border-[#91BF77] transition-all duration-300">
+                    <span class="font-semibold text-lg">{{ $loop->iteration }}.</span>
+                    <p class="text-sm">{{ $rule->name }}</p>
+                </div>
+            </div>
+        @endforeach
+    </div>    
+    
     <div id="Contact-Tab" class="tab-content flex-col gap-5 hidden">
         <p class="text-sm leading-[28px]">If you have any questions please contact this contact</p>
         @foreach ($boardingHouse->contacts as $contact)
